@@ -1,0 +1,4 @@
+﻿   Qt/MSBuild: 3.3.1.1
+   Qt: 6.9.0
+  gui.cpp
+  autocomplete.vcxproj -> C:\Users\assaf\Source\Repos\autocomplete\x64\Debug\autocomplete.exe
