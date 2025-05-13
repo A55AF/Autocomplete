@@ -19,6 +19,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
@@ -42,6 +43,9 @@ public:
     QVBoxLayout *verticalLayout_1;
     QComboBox *searchMode;
     QPushButton *sortBy;
+    QHBoxLayout *horizontalLayout;
+    QSpinBox *wordFrequency;
+    QPushButton *addWord;
     QSpacerItem *verticalSpacer;
     QStatusBar *statusBar;
 
@@ -49,7 +53,7 @@ public:
     {
         if (GuiClass->objectName().isEmpty())
             GuiClass->setObjectName("GuiClass");
-        GuiClass->resize(881, 488);
+        GuiClass->resize(645, 489);
         centralWidget = new QWidget(GuiClass);
         centralWidget->setObjectName("centralWidget");
         verticalLayoutWidget = new QWidget(centralWidget);
@@ -100,7 +104,7 @@ public:
         listView = new QListWidget(verticalLayoutWidget);
         listView->setObjectName("listView");
         QSizePolicy sizePolicy1(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setHorizontalStretch(2);
         sizePolicy1.setVerticalStretch(2);
         sizePolicy1.setHeightForWidth(listView->sizePolicy().hasHeightForWidth());
         listView->setSizePolicy(sizePolicy1);
@@ -124,26 +128,58 @@ public:
         searchMode->addItem(QString());
         searchMode->addItem(QString());
         searchMode->addItem(QString());
+        searchMode->addItem(QString());
         searchMode->setObjectName("searchMode");
-        sizePolicy.setHeightForWidth(searchMode->sizePolicy().hasHeightForWidth());
-        searchMode->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(searchMode->sizePolicy().hasHeightForWidth());
+        searchMode->setSizePolicy(sizePolicy2);
         searchMode->setMinimumSize(QSize(80, 20));
-        searchMode->setMaximumSize(QSize(160, 30));
+        searchMode->setMaximumSize(QSize(180, 30));
 
         verticalLayout_1->addWidget(searchMode);
 
         sortBy = new QPushButton(verticalLayoutWidget);
         sortBy->setObjectName("sortBy");
-        sizePolicy.setHeightForWidth(sortBy->sizePolicy().hasHeightForWidth());
-        sortBy->setSizePolicy(sizePolicy);
+        sizePolicy2.setHeightForWidth(sortBy->sizePolicy().hasHeightForWidth());
+        sortBy->setSizePolicy(sizePolicy2);
         sortBy->setMinimumSize(QSize(80, 20));
-        sortBy->setMaximumSize(QSize(160, 30));
+        sortBy->setMaximumSize(QSize(180, 30));
         sortBy->setCursor(QCursor(Qt::CursorShape::ArrowCursor));
-        QIcon icon1(QIcon::fromTheme(QIcon::ThemeIcon::GoDown));
+        QIcon icon1(QIcon::fromTheme(QIcon::ThemeIcon::GoUp));
         sortBy->setIcon(icon1);
         sortBy->setIconSize(QSize(14, 14));
 
         verticalLayout_1->addWidget(sortBy);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setSizeConstraint(QLayout::SizeConstraint::SetFixedSize);
+        wordFrequency = new QSpinBox(verticalLayoutWidget);
+        wordFrequency->setObjectName("wordFrequency");
+        wordFrequency->setMinimumSize(QSize(70, 20));
+        wordFrequency->setMaximumSize(QSize(80, 30));
+        wordFrequency->setMinimum(1);
+        wordFrequency->setMaximum(100);
+
+        horizontalLayout->addWidget(wordFrequency);
+
+        addWord = new QPushButton(verticalLayoutWidget);
+        addWord->setObjectName("addWord");
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(addWord->sizePolicy().hasHeightForWidth());
+        addWord->setSizePolicy(sizePolicy3);
+        addWord->setMinimumSize(QSize(70, 20));
+        addWord->setMaximumSize(QSize(80, 30));
+
+        horizontalLayout->addWidget(addWord);
+
+
+        verticalLayout_1->addLayout(horizontalLayout);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
@@ -168,12 +204,16 @@ public:
     void retranslateUi(QMainWindow *GuiClass)
     {
         GuiClass->setWindowTitle(QCoreApplication::translate("GuiClass", "Gui", nullptr));
+        searchTextField->setText(QString());
+        searchTextField->setPlaceholderText(QCoreApplication::translate("GuiClass", "Search", nullptr));
         clearTextField->setText(QCoreApplication::translate("GuiClass", "...", nullptr));
         searchMode->setItemText(0, QCoreApplication::translate("GuiClass", "Default", nullptr));
         searchMode->setItemText(1, QCoreApplication::translate("GuiClass", "Shortest", nullptr));
         searchMode->setItemText(2, QCoreApplication::translate("GuiClass", "Lexographically", nullptr));
+        searchMode->setItemText(3, QCoreApplication::translate("GuiClass", "Fuzzy", nullptr));
 
         sortBy->setText(QCoreApplication::translate("GuiClass", "Ascending", nullptr));
+        addWord->setText(QCoreApplication::translate("GuiClass", "Add Word", nullptr));
     } // retranslateUi
 
 };

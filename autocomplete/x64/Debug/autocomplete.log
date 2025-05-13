@@ -1,7 +1,11 @@
 ﻿   Qt/MSBuild: 3.3.1.1
    Qt: 6.9.0
   uic gui.ui
+  moc gui.h
   gui.cpp
   main.cpp
+  trie.cpp
+  trie_tools.cpp
+C:\Users\assaf\Source\Repos\autocomplete\trie.cpp(26,54): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   moc_gui.cpp
   autocomplete.vcxproj -> C:\Users\assaf\Source\Repos\autocomplete\x64\Debug\autocomplete.exe

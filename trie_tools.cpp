@@ -2,7 +2,7 @@
 #include "trie.h"
 #include<string>
 #include<vector>
-#include<assert.h>
+#include<cassert>
 using namespace std;
 
 int Tools::get_id(char c) {
@@ -13,7 +13,10 @@ int Tools::get_id(char c) {
 }
 
 char Tools::get_char(int id) {
-    return id + ' ';
+    char c = id + ' ';
+    if (c >= 'A' && c <= 'Z')
+        c = tolower(c);
+    return c;
 }
 
 bool Tools::exist(int node, int idx, vector<Node>& trie) {
