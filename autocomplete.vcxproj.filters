@@ -46,12 +46,18 @@
     <ClCompile Include="trie_tools.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="load_files.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="trie_tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="load_files.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

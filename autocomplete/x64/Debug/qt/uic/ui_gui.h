@@ -58,7 +58,7 @@ public:
         centralWidget->setObjectName("centralWidget");
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName("verticalLayoutWidget");
-        verticalLayoutWidget->setGeometry(QRect(110, 70, 461, 309));
+        verticalLayoutWidget->setGeometry(QRect(110, 70, 490, 301));
         mainLayout = new QVBoxLayout(verticalLayoutWidget);
         mainLayout->setSpacing(6);
         mainLayout->setContentsMargins(11, 11, 11, 11);
@@ -69,22 +69,27 @@ public:
         horizontalLayout_1->setObjectName("horizontalLayout_1");
         searchTextField = new QLineEdit(verticalLayoutWidget);
         searchTextField->setObjectName("searchTextField");
-        QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
+        QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(searchTextField->sizePolicy().hasHeightForWidth());
         searchTextField->setSizePolicy(sizePolicy);
-        searchTextField->setMinimumSize(QSize(150, 25));
-        searchTextField->setMaximumSize(QSize(16777215, 35));
+        searchTextField->setMinimumSize(QSize(150, 35));
+        searchTextField->setMaximumSize(QSize(16777215, 40));
+        searchTextField->setStyleSheet(QString::fromUtf8(""));
 
         horizontalLayout_1->addWidget(searchTextField);
 
         clearTextField = new QToolButton(verticalLayoutWidget);
         clearTextField->setObjectName("clearTextField");
-        sizePolicy.setHeightForWidth(clearTextField->sizePolicy().hasHeightForWidth());
-        clearTextField->setSizePolicy(sizePolicy);
-        clearTextField->setMinimumSize(QSize(25, 25));
-        clearTextField->setMaximumSize(QSize(35, 35));
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(clearTextField->sizePolicy().hasHeightForWidth());
+        clearTextField->setSizePolicy(sizePolicy1);
+        clearTextField->setMinimumSize(QSize(35, 35));
+        clearTextField->setMaximumSize(QSize(40, 40));
+        clearTextField->setStyleSheet(QString::fromUtf8(""));
         QIcon icon(QIcon::fromTheme(QIcon::ThemeIcon::WindowClose));
         clearTextField->setIcon(icon);
         clearTextField->setIconSize(QSize(10, 10));
@@ -103,12 +108,12 @@ public:
         verticalLayout_2->setObjectName("verticalLayout_2");
         listView = new QListWidget(verticalLayoutWidget);
         listView->setObjectName("listView");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
-        sizePolicy1.setHorizontalStretch(2);
-        sizePolicy1.setVerticalStretch(2);
-        sizePolicy1.setHeightForWidth(listView->sizePolicy().hasHeightForWidth());
-        listView->setSizePolicy(sizePolicy1);
-        listView->setMinimumSize(QSize(160, 200));
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
+        sizePolicy2.setHorizontalStretch(2);
+        sizePolicy2.setVerticalStretch(2);
+        sizePolicy2.setHeightForWidth(listView->sizePolicy().hasHeightForWidth());
+        listView->setSizePolicy(sizePolicy2);
+        listView->setMinimumSize(QSize(300, 200));
         listView->setMaximumSize(QSize(16777215, 700));
         listView->setFrameShape(QFrame::Shape::StyledPanel);
 
@@ -130,22 +135,23 @@ public:
         searchMode->addItem(QString());
         searchMode->addItem(QString());
         searchMode->setObjectName("searchMode");
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(searchMode->sizePolicy().hasHeightForWidth());
-        searchMode->setSizePolicy(sizePolicy2);
-        searchMode->setMinimumSize(QSize(80, 20));
-        searchMode->setMaximumSize(QSize(180, 30));
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Maximum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(searchMode->sizePolicy().hasHeightForWidth());
+        searchMode->setSizePolicy(sizePolicy3);
+        searchMode->setMinimumSize(QSize(80, 30));
+        searchMode->setMaximumSize(QSize(180, 40));
+        searchMode->setStyleSheet(QString::fromUtf8(""));
 
         verticalLayout_1->addWidget(searchMode);
 
         sortBy = new QPushButton(verticalLayoutWidget);
         sortBy->setObjectName("sortBy");
-        sizePolicy2.setHeightForWidth(sortBy->sizePolicy().hasHeightForWidth());
-        sortBy->setSizePolicy(sizePolicy2);
-        sortBy->setMinimumSize(QSize(80, 20));
-        sortBy->setMaximumSize(QSize(180, 30));
+        sizePolicy3.setHeightForWidth(sortBy->sizePolicy().hasHeightForWidth());
+        sortBy->setSizePolicy(sizePolicy3);
+        sortBy->setMinimumSize(QSize(80, 30));
+        sortBy->setMaximumSize(QSize(180, 40));
         sortBy->setCursor(QCursor(Qt::CursorShape::ArrowCursor));
         QIcon icon1(QIcon::fromTheme(QIcon::ThemeIcon::GoUp));
         sortBy->setIcon(icon1);
@@ -159,8 +165,10 @@ public:
         horizontalLayout->setSizeConstraint(QLayout::SizeConstraint::SetFixedSize);
         wordFrequency = new QSpinBox(verticalLayoutWidget);
         wordFrequency->setObjectName("wordFrequency");
+        sizePolicy3.setHeightForWidth(wordFrequency->sizePolicy().hasHeightForWidth());
+        wordFrequency->setSizePolicy(sizePolicy3);
         wordFrequency->setMinimumSize(QSize(70, 20));
-        wordFrequency->setMaximumSize(QSize(80, 30));
+        wordFrequency->setMaximumSize(QSize(80, 40));
         wordFrequency->setMinimum(1);
         wordFrequency->setMaximum(100);
 
@@ -168,13 +176,13 @@ public:
 
         addWord = new QPushButton(verticalLayoutWidget);
         addWord->setObjectName("addWord");
-        QSizePolicy sizePolicy3(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(addWord->sizePolicy().hasHeightForWidth());
-        addWord->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy4(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Maximum);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(addWord->sizePolicy().hasHeightForWidth());
+        addWord->setSizePolicy(sizePolicy4);
         addWord->setMinimumSize(QSize(70, 20));
-        addWord->setMaximumSize(QSize(80, 30));
+        addWord->setMaximumSize(QSize(80, 40));
 
         horizontalLayout->addWidget(addWord);
 

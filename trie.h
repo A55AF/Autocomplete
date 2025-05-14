@@ -1,8 +1,8 @@
 #pragma once
-#include<vector>
-#include<string>
-#include<unordered_map>
-#include<set>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <set>
 #include "ui_gui.h"
 using namespace std;
 

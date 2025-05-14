@@ -1,4 +1,12 @@
 <RCC>
-    <qresource prefix="Gui">
+    <qresource prefix="/Gui"/>
+    <qresource prefix="/autocomplete">
+        <file>assets/fonts/SpaceGrotesk.ttf</file>
+        <file>assets/styles/style.qss</file>
+        <file>assets/fonts/inter.ttf</file>
+        <file>assets/images/up.png</file>
+        <file>assets/images/down.png</file>
+        <file>assets/sounds/error.wav</file>
+        <file>data/words.csv</file>
     </qresource>
 </RCC>

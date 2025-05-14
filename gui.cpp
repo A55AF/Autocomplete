@@ -1,32 +1,36 @@
-﻿#include "gui.h"
-#include<QListWidget>
-#include<QLabel>
-#include<QPushButton>
-#include<QWidget>
-#include<iostream>
+﻿#include <iostream>
+#include <QtWidgets/QApplication>
+#include <QSoundEffect>
+#include "gui.h"
+
 Gui::Gui(QWidget* parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
     QWidget* centralWidget = new QWidget(this);
-    gsearch(0, "", ui.sortBy->text() == "Ascending");
+    this->setCentralWidget(centralWidget);
+    centralWidget->setLayout(ui.mainLayout);
+
+    Files::loadData(trie);
+
+    refreshList();
+
+    searchTimer = new QTimer(this);
+    searchTimer->setSingleShot(true);
+    searchTimer->setInterval(2000);
+
     connect(ui.clearTextField, &QPushButton::clicked, this, &Gui::onButtonClickedClearTextField);
     connect(ui.searchTextField, &QLineEdit::textEdited, this, &Gui::onChangeSearchTextField);
     connect(ui.addWord, &QPushButton::clicked, this, &Gui::onButtonClickedAddWord);
     connect(ui.sortBy, &QPushButton::clicked, this, &Gui::onButtonClickedSortBy);
     connect(ui.searchMode, &QComboBox::currentIndexChanged, this, &Gui::onComboBoxChangedSearchMode);
-    
-    searchTimer = new QTimer(this);
-    searchTimer->setSingleShot(true);
-    searchTimer->setInterval(2000);
-    
     connect(searchTimer, &QTimer::timeout, this, &Gui::onTimeout);
-    this->setCentralWidget(centralWidget);
-    centralWidget->setLayout(ui.mainLayout);
 }
 
 Gui::~Gui()
 {
+    Files::writeData(trie);
+    delete searchTimer;
 }
 
 void Gui::onComboBoxChangedSearchMode() {
@@ -63,14 +67,17 @@ void Gui::onButtonClickedAddWord() {
     }
 }
 
-void Gui::addWordItem(const QString& word, int freq) {
+void Gui::addWordItem(const QString& word, int freq, bool highlighted) {
     auto* itemWidget = new QCustomListItem(word, freq);
     auto* listItem = new QListWidgetItem(ui.listView);
 
     listItem->setSizeHint(itemWidget->sizeHint());
-
     ui.listView->addItem(listItem);
     ui.listView->setItemWidget(listItem, itemWidget);
+
+    if (highlighted) {
+        listItem->setBackground(QBrush(QColor("#3c3c3c")));
+    }
 
     connect(itemWidget, &QCustomListItem::deleteWord, this, [=](const QString& wordToDelete) {
         string word = wordToDelete.toStdString();
@@ -78,7 +85,7 @@ void Gui::addWordItem(const QString& word, int freq) {
 
         int row = ui.listView->row(listItem);
         delete ui.listView->takeItem(row);
-        });
+    });
 }
 
 void Gui::onButtonClickedClearTextField() {
@@ -93,9 +100,13 @@ void Gui::onChangeSearchTextField() {
 
 void Gui::onTimeout() {
     string word = ui.searchTextField->text().toStdString();
+    if (!word.size()) {
+        return;
+    }
     unordered_map<string, int>& searched_words = trie.get_searched_words();
     if (!trie.word_exist(word)) {
         if (++searched_words[word] == 3) {
+            qDebug() << "Word not found in trie";
             trie.add(word, 1);
             refreshList();
             searched_words.erase(word);
@@ -107,41 +118,52 @@ void Gui::onTimeout() {
     }
 }
 
-// Refresh List every change in textField/searching mode/clear textfield
 void Gui::refreshList() {
     int mode = ui.searchMode->currentIndex();
     string word = ui.searchTextField->text().toStdString();
     bool ascending = ui.sortBy->text() == "Ascending";
-    ui.listView->clear();
-    gsearch(mode, word, ascending);
+    char last_char = word.size() ? word.back() : 'A';
+    if (last_char >= 'a' && last_char <= 'z')
+        last_char = toupper(last_char);
+    if ( last_char >= ' ' && last_char <= 'Z') {
+        ui.listView->clear();
+        gsearch(mode, word, ascending);
+        return;
+    }
+
+    word.pop_back();
+    ui.searchTextField->setText(QString::fromStdString(word));
+    QSoundEffect* errorSound = new QSoundEffect(this);
+    errorSound->setSource(QUrl("qrc:/autocomplete/assets/sounds/error.wav"));
+    errorSound->setVolume(0.8f);
+    errorSound->play();
 }
 
-// Searching in trie for GUI
 void Gui::gsearch_default(string prefix, bool ascending) {
     vector<pair<int, string>> output = trie.search_default(prefix, ascending);
     for (auto [frq, word] : output) {
-        addWordItem(QString::fromStdString(word), frq);
+        addWordItem(QString::fromStdString(word), frq,prefix==word);
     }
 }
 
 void Gui::gsearch_shortest(string prefix, bool ascending) {
     vector<string> output = trie.search_shortest(prefix, ascending);
     for (string word : output) {
-        addWordItem(QString::fromStdString(word), trie.freq_prefix(word));
+        addWordItem(QString::fromStdString(word), trie.freq_prefix(word), prefix == word);
     }
 }
 
 void Gui::gsearch_lexo(string prefix, bool ascending) {
     vector<pair<int, string>> output = trie.search_lexicographical_order(prefix, ascending);
     for (auto [frq, word] : output) {
-        addWordItem(QString::fromStdString(word), trie.freq_prefix(word));
+        addWordItem(QString::fromStdString(word), trie.freq_prefix(word), prefix == word);
     }
 }
 
 void Gui::gsearch_fuzzy(string prefix) {
     set<string> output = trie.search_fuzzy(prefix);
     for (string word : output) {
-        addWordItem(QString::fromStdString(word), trie.freq_prefix(word));
+        addWordItem(QString::fromStdString(word), trie.freq_prefix(word), prefix == word);
     }
 }
 

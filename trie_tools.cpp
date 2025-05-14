@@ -1,14 +1,12 @@
 #include "trie_tools.h"
 #include "trie.h"
-#include<string>
-#include<vector>
-#include<cassert>
+#include <string>
+#include <vector>
 using namespace std;
 
 int Tools::get_id(char c) {
     if (c >= 'a' && c <= 'z')
         c = toupper(c);
-    assert(c >= 32 && c <= 90);
     return c - ' ';
 }
 

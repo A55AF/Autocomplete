@@ -1,12 +1,14 @@
 ﻿#pragma once
-
 #include <QtWidgets/QMainWindow>
 #include <QLineEdit>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <QTimer>
+#include <QFontDatabase>
+#include "load_files.h"
 #include "ui_gui.h"
 #include "trie.h"
-#include<QTimer>
+
 
 class Gui : public QMainWindow
 {
@@ -25,7 +27,7 @@ private:
     void onButtonClickedAddWord();
     void onButtonClickedSortBy();
     void onComboBoxChangedSearchMode();
-    void addWordItem(const QString& word, int freq);
+    void addWordItem(const QString&, int,bool);
     void gsearch_default(string, bool);
     void gsearch_lexo(string, bool);
     void gsearch_shortest(string, bool);
@@ -52,11 +54,15 @@ public:
         deleteButton->setMinimumHeight(35);
         deleteButton->setMaximumWidth(40);
         deleteButton->setMaximumHeight(40);
+        deleteButton->setObjectName("deleteButton");
+        wordLabel->setFont(QFont(Files::fonts()[0], 14));
+        freqLabel->setFont(QFont(Files::fonts()[0], 14));
 
         layout->addWidget(wordLabel);
         layout->addWidget(freqLabel);
         layout->addWidget(deleteButton);
-        layout->setContentsMargins(5, 0, 5, 0);
+        layout->setContentsMargins(10, 5, 10, 5);
+
 
         connect(deleteButton, &QPushButton::clicked, this, &QCustomListItem::onDeleteClicked);
     }
