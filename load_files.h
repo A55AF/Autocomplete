@@ -5,7 +5,9 @@
 #include <QFontDatabase>
 #include <QCloseEvent>
 #include "trie.h"
-
+#include<vector>
+#include<string>
+using namespace std;
 
 class Files {
 private:
@@ -18,5 +20,7 @@ public:
     static const QStringList& fonts();
     static const QString& style();
     static void loadData(Trie&);
+    static vector<pair<string,int>> loadWordFreqs(Trie&);
     static void writeData(Trie&);
+    static void saveWordFreqs(Trie&trie);
 };

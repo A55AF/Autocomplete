@@ -18,6 +18,9 @@ public:
     Gui(QWidget *parent = nullptr);
     ~Gui();
 
+protected:
+    void closeEvent(QCloseEvent* event) override;
+
 private:
     Ui::GuiClass ui;
     QTimer* searchTimer;

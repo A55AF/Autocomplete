@@ -14,7 +14,6 @@ struct Node {
 class Trie {
 private:
     vector<Node> trie;
-    int max_depth = 0;
     unordered_map<string, int> searched_words;
 public:
     static const int Lim = 60;
@@ -23,8 +22,6 @@ public:
     vector<pair<int, string>> search_default(string&, bool);
     vector<string> search_shortest(string&, bool);
     vector<pair<int, string>> search_lexicographical_order(string&, bool);
-    void search();
-    void erase_interface();
     void erase(string&);
     bool word_exist(string&);
     void dfs_search_fuzzy(int, int, string&, set<string>&, string&);

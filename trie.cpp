@@ -15,7 +15,6 @@ Trie::Trie() {
 }
 
 void Trie::add(string& s, int cnt) {
-    max_depth = max(max_depth, (int)s.size());
     if (searched_words.count(s)) {
         searched_words.erase(s);
     }
@@ -73,45 +72,6 @@ vector<pair<int, string>> Trie::search_lexicographical_order(string& s, bool inc
     return all;
 }
 
-void Trie::search() {
-    cout << "Choose :\n";
-    cout << "1:- Search Default\n";
-    cout << "2:- Search Shortest\n";
-    cout << "3:- Search Lex.\n";
-    cout << "4:- Search Fuzzy\n";
-    int choice;cin >> choice;
-    bool inc;
-    cout << " inc ? : ";
-    cin >> inc;
-
-    string inp;cin >> inp;
-    if (!word_exist(inp)) {
-        if (++searched_words[inp] == 3) {
-            add(inp, 1);
-            searched_words.erase(inp);
-        }
-    }
-    switch (choice) {
-    case 1:
-        search_default(inp, inc);
-        break;
-
-    case 2:
-        search_shortest(inp, inc);
-        break;
-
-    case 3:
-        search_lexicographical_order(inp, inc);
-        break;
-
-    case 4:
-        search_fuzzy(inp);
-        break;
-
-    default:cout << "invalid\n";
-    }
-}
-
 void Trie::erase(string& s) {
     int cur_node = 0;
     int last = Tools::get_last(s, trie);
@@ -122,25 +82,6 @@ void Trie::erase(string& s) {
         trie[cur_node].freq -= fr_me;
     }
     trie[cur_node].end -= fr_me;
-}
-
-void Trie::erase_interface() {
-    while (true) {
-        cout << "Enter the word : \n";
-        string s;cin >> s;
-        int last = Tools::get_last(s, trie);
-        if (~last && trie[last].end) {
-            erase(s);
-            break;
-        }
-        if (last == -1) {
-            cout << "no words found\n";
-        }
-        else {
-            cout << "choose the correct word\n";
-            search_shortest(s,1);
-        }
-    }
 }
 
 bool Trie::word_exist(string& s) {

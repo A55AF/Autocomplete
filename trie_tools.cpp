@@ -35,7 +35,7 @@ int Tools::get_last(string& s, vector<Node>& trie) {
 void Tools::dfs(int node, vector<pair<int, string>>& all, string& cur, bool freq, vector<Node>& trie) {
     if (trie[node].end)                                                       // and push {freq , word}
         all.push_back({ freq ? trie[node].end : 0, cur });
-    for (int i = 0; i < Trie().Lim; i++) {
+    for (int i = 0; i < Trie::Lim; i++) {
         if (exist(node, i, trie)) {
             cur.push_back(get_char(i));
             dfs(trie[node].children[i], all, cur, freq, trie);

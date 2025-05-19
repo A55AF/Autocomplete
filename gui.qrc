@@ -7,6 +7,6 @@
         <file>assets/images/up.png</file>
         <file>assets/images/down.png</file>
         <file>assets/sounds/error.wav</file>
-        <file>data/words.csv</file>
+        <file>data/words.txt</file>
     </qresource>
 </RCC>

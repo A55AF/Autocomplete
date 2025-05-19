@@ -4,8 +4,9 @@
 #include <QFontDatabase>
 #include <QTextStream>
 #include <QRegularExpression>
-#include <QDebug>
 #include <vector>
+#include <fstream>
+#include <sstream>
 #include "trie.h"
 #include "load_files.h"
 using namespace std;
@@ -62,35 +63,33 @@ const QString& Files::style() {
     return styleCache;
 }
 
-void Files::loadData(Trie& trie) {
-    QFile file(":/autocomplete/data/words.csv");
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "Failed to open file WORDS";
-        return;
+vector<pair<string, int>> Files::loadWordFreqs(Trie&trie) {
+	const string& filename = "data/words.txt";
+    ifstream inFile(filename);
+    vector<pair<string, int>> result;
+    string line;
+
+    while (getline(inFile, line)) {
+        istringstream iss(line);
+        string word;
+        int freq;
+        if (iss >> word >> freq) {
+            trie.add(word, freq);
+        }
     }
-    QTextStream in(&file);
-    while (!in.atEnd()) {
-        QString line = in.readLine();
-        QStringList splited_line = line.split(QRegularExpression(","), Qt::SkipEmptyParts);
-        string word = splited_line[0].toStdString();
-        int freq = splited_line[1].toInt();
-        trie.add(word, freq);
-    }
-    file.close();
+    inFile.close();
+    return result;
 }
 
-void Files::writeData(Trie& trie) {
-	QFile file("data/words.csv");
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qDebug() << "Failed to open file for writing";
-        return;
-    }
-	QTextStream out(&file);
-    string inp = "";
-    vector<string> words = trie.search_shortest(inp, 1);
-    for (string& word : words) {
-        out << QString::fromStdString(word) << "," << trie.freq_prefix(word) << "\n";
-    }
+void Files::saveWordFreqs(Trie& trie) {
+    filesystem::create_directories("data");
 
-    file.close();
+    ofstream outFile("data/words.txt");
+
+    string str = "";
+    const auto data = trie.search_default(str, 1);
+
+    for (const auto& [freq, word] : data) {
+        outFile << word << " " << freq << "\n";
+    }
 }

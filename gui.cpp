@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <QtWidgets/QApplication>
 #include <QSoundEffect>
+#include <QCloseEvent>
 #include "gui.h"
 
 Gui::Gui(QWidget* parent)
@@ -11,7 +12,7 @@ Gui::Gui(QWidget* parent)
     this->setCentralWidget(centralWidget);
     centralWidget->setLayout(ui.mainLayout);
 
-    Files::loadData(trie);
+	Files::loadWordFreqs(trie);
 
     refreshList();
 
@@ -29,8 +30,12 @@ Gui::Gui(QWidget* parent)
 
 Gui::~Gui()
 {
-    Files::writeData(trie);
     delete searchTimer;
+}
+
+void Gui::closeEvent(QCloseEvent* event) {
+    Files::saveWordFreqs(trie);
+    event->accept();
 }
 
 void Gui::onComboBoxChangedSearchMode() {
