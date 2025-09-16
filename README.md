@@ -1,5 +1,9 @@
 # Autocomplete Dictionary (Trie-based)
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 ## 📌 Overview
 This project is an **autocomplete system** for a dictionary implemented using a **Trie** data structure.  
 It loads words from a `.txt` dictionary file and provides efficient search capabilities with multiple modes and sorting options.  
@@ -70,20 +74,11 @@ Before running the project, make sure you have:
 
 * Optimize search performance.
 * Support more characters.
-
-## 📜 License
-
-This project is open-source. Feel free to use and modify it.
-
-
+* 
 ## ✨ Contributors
 
 Thanks to all team members for their efforts ❤️.
 
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -104,3 +99,4 @@ Thanks to all team members for their efforts ❤️.
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
