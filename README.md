@@ -78,3 +78,9 @@ Before running the project, make sure you have:
 ## 📜 License
 
 This project is open-source. Feel free to use and modify it.
+
+---
+
+## ✨ Contributors
+
+Thanks to all the team members.
