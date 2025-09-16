@@ -1,7 +1,4 @@
 # Autocomplete Dictionary (Trie-based)
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 📌 Overview
 This project is an **autocomplete system** for a dictionary implemented using a **Trie** data structure.  
@@ -69,28 +66,24 @@ Before running the project, make sure you have:
 └── README.md       # Project documentation
 ```
 
----
-
 ## ✅ Future Improvements
 
 * Optimize search performance.
 * Support more characters.
 
----
-
 ## 📜 License
 
 This project is open-source. Feel free to use and modify it.
 
----
 
 ## ✨ Contributors
 
-Thanks to all the team members.
+Thanks to all team members for their efforts ❤️.
 
-## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -111,5 +104,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
