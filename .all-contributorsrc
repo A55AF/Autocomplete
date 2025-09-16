@@ -28,6 +28,16 @@
         "test",
         "doc"
       ]
+    },
+    {
+      "login": "ISMAILGAMAL",
+      "name": "Ismail Gamal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/124633678?v=4",
+      "profile": "https://github.com/ISMAILGAMAL",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
