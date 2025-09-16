@@ -74,7 +74,7 @@ Before running the project, make sure you have:
 
 * Optimize search performance.
 * Support more characters.
-* 
+
 ## ✨ Contributors
 
 Thanks to all team members for their efforts ❤️.
@@ -99,4 +99,5 @@ Thanks to all team members for their efforts ❤️.
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
 
